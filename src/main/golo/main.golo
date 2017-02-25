@@ -15,6 +15,9 @@ function main = |args| {
       let addition = operations: find(|operation| -> operation: name(): equals("addition"))
       addition: run([40, 2]): onSet(|data|-> println(data: result())) # == 42
 
+      let stringConcat = operations: find(|operation| -> operation: name(): equals("concat"))
+      stringConcat: run(DynamicObject(): a("Hello"): b(" world")): onSet(|data|-> println(data: result()))
+
     })
     : onFail(|error| { # if failed
       println("😡: " + error: message())
