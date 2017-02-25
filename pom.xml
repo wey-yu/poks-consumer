@@ -29,10 +29,10 @@
     </dependency>
 
     <dependency>
-      <groupId>com.googlecode.json-simple</groupId>
-      <artifactId>json-simple</artifactId>
-      <version>1.1.1</version>
-    </dependency>    
+	    <groupId>com.github.wey-yu</groupId>
+	    <artifactId>poks-core-libs</artifactId>
+	    <version>1.0.0-alpha</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -43,8 +43,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.0</version>
         <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
+          <source>1.8</source>
+          <target>1.8</target>
         </configuration>
       </plugin>
       <plugin>
@@ -104,6 +104,10 @@
       <name>Bintray</name>
       <url>https://jcenter.bintray.com</url>
     </repository>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
   </repositories>
 
   <pluginRepositories>
