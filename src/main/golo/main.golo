@@ -4,24 +4,33 @@ import poks.services.consumer
 
 function main = |args| {
 
+  # get the services list from server
+  services()
+    : onSet(|servicesList| {
+      servicesList: each(|service| { println(service) })
+    })
+    : onFail(|error| { # if failed
+      println("😡: " + error: message())
+    })
+
+  # use operations of the "calculator:42" service
   operations("calculator:42")
     : onSet(|operations| {
-      let product = operations: find(|operation| -> operation: name(): equals("product"))
-      product: run([7, 10]): onSet(|data|-> println(data: result())) # == 70
 
-      let divide = operations: find(|operation| -> operation: name(): equals("divide"))
-      divide: run([50, 10]): onSet(|data|-> println(data: result())) # == 5
+      operations: product(7, 10): onSet(|data|-> println(data: result())) # == 70
 
-      let addition = operations: find(|operation| -> operation: name(): equals("addition"))
-      addition: run([40, 2]): onSet(|data|-> println(data: result())) # == 42
+      operations: divide(50, 10): onSet(|data|-> println(data: result())) # == 5
 
-      let stringConcat = operations: find(|operation| -> operation: name(): equals("concat"))
-      stringConcat: run(DynamicObject(): a("Hello"): b(" world")): onSet(|data|-> println(data: result()))
+      operations: addition(40, 2): onSet(|data|-> println(data: result())) # == 42
+
+      operations: concat(DynamicObject(): a("Hello"): b(" world!!!"))
+        : onSet(|data|-> println(data: result())) # Hello world!!!
 
     })
     : onFail(|error| { # if failed
       println("😡: " + error: message())
     })
+
 
 
 }
